@@ -1,0 +1,12 @@
+{
+    "irc": {
+        "server": ["cs1692x.moocforums.org", 6667],
+        "nick": "SE-Suggestion",
+        "password": null,
+        "channel": "#jb_test"
+    },
+    "stackexchange": {
+        "client_id": 2943,
+        "key": "TAfjcYmDQH27pf1CN17qRw(("
+    }
+}
