@@ -1,4 +1,4 @@
-all: test run
+default: test run
 
 run: install-dependencies
 	PYTHONPATH="src/:$(PYTHONPATH)" python -m stacksuggestionsbot \
@@ -7,5 +7,10 @@ run: install-dependencies
 test: install-dependencies
 	PYTHONPATH="src/:$(PYTHONPATH)" python -m pytest
 
+install:
+	rm -rf src/*.egg-info
+	pip install .
+
 install-dependencies:
-	pip install -qr requirements.txt
+	rm -rf src/*.egg-info
+	pip install -qe .

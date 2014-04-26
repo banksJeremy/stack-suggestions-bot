@@ -31,6 +31,12 @@ def test_stackexchange_init_sites():
 
 @urlmatch(netloc=r'^api\.stackexchange\.com$', path=r'^/2\.2/sites$')
 def sites_returning_stackoverflow(url, request):
+    """
+    A response for a /sites request; accurate except that it indicates
+    that Stack Overflow is the only site on the network (despite
+    referring to others in related_sites).
+    """
+    
     return json.dumps({
         "items": [{
             "aliases": ["http://www.stackoverflow.com", "http://facebook.stackoverflow.com"],
@@ -62,7 +68,7 @@ def sites_returning_stackoverflow(url, request):
             "name": "Stack Overflow",
             "site_type": "main_site"
         }],
-        "has_more": True,
+        "has_more": False,
         "quota_max": 300,
         "quota_remaining": 273
     })
