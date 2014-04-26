@@ -1,6 +1,8 @@
 stack-suggestions-bot
 =====================
 
+[![Travis CI build status for master](https://travis-ci.org/jeremybanks/stack-suggestions-bot.svg?branch=master)](https://travis-ci.org/jeremybanks/stack-suggestions-bot)
+
 This will be an IRC chat bot which suggests relevant Stack Exchange 
 questions when questions are asked in chat.
 
