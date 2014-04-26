@@ -1,42 +1,16 @@
 import json
 
-import pytest
-from httmock import urlmatch, HTTMock
-
-import stackexchange
+import httmock
 
 
-def test_stackexchange_init_sites():
-    """
-    Tests that the StackExchange class will correctly initialize a list
-    of Site objects based on a request to /sites, when instantiated.
-    """
-    with HTTMock(sites_returning_stackoverflow):
-        stack_exchange = stackexchange.StackExchange()
-
-        assert len(stack_exchange.sites) == 1
-
-        with pytest.raises(ValueError):
-            stack_exchange.get_site("this is a no\x00t a site")
-
-        stack_overflow = stack_exchange.get_site("Stack Overflow")
-
-        assert stack_overflow == stack_exchange.get_site('stackoverflow')
-
-        assert stack_overflow.se == stack_exchange
-        assert stack_overflow.name == "Stack Overflow"
-        assert stack_overflow.site_type == 'main_site'
-        assert stack_overflow.site_state == 'normal'
-
-
-@urlmatch(netloc=r'^api\.stackexchange\.com$', path=r'^/2\.2/sites$')
+@httmock.urlmatch(netloc=r'^api\.stackexchange\.com$', path=r'^/2\.2/sites$')
 def sites_returning_stackoverflow(url, request):
     """
     A response for a /sites request; accurate except that it indicates
     that Stack Overflow is the only site on the network (despite
     referring to others in related_sites).
     """
-    
+
     return json.dumps({
         "items": [{
             "aliases": ["http://www.stackoverflow.com", "http://facebook.stackoverflow.com"],
@@ -71,4 +45,13 @@ def sites_returning_stackoverflow(url, request):
         "has_more": False,
         "quota_max": 300,
         "quota_remaining": 273
+    })
+
+
+@httmock.urlmatch(netloc=r'^api\.stackexchange\.com$', path=r'^/2\.2/questions')
+def throttle_violation_for_questions(url, request):
+    return json.dumps({
+        "error_id": 502,
+        "error_message": "too many requests from this IP, more requests available in 65127 seconds",
+        "error_name": "throttle_violation"
     })
