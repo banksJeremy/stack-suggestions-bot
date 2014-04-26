@@ -32,3 +32,22 @@ class Site(object):
         self.site_type = site_data['site_type']
         self.styling = site_data['styling']
         self.twitter_account = site_data.get('twitter_account')
+
+    def _request(self, path, object_hook=None, **kwargs):
+        return self.se._request(
+            path, self.api_site_parameter, object_hook, **kwargs)
+
+    def get_similar(self, title, preferred_tags=None, excluded_tags=None):
+        """
+        Requests some questions similar to a title.
+        """
+        params = {
+            'title': title,
+            'sort': 'relevance',
+            'page': 1,
+            'page_size': 25,
+            'tagged': ';'.join(preferred_tags or []),
+            'nottagged': ';'.join(excluded_tags or [])
+        }
+
+        return self._request('similar', **params)['items']

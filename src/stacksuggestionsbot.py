@@ -32,8 +32,10 @@ def main():
     settings = json.load(sys.stdin)
 
     app = Application(settings)
+    
+    similar = app.site.get_similar("how do i install vm on ec2?")
 
-    pp(app.site._dict)
+    pp(similar)
 
 
 if __name__ == '__main__':
