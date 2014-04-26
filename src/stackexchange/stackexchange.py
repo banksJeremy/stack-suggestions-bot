@@ -21,7 +21,7 @@ class StackExchange(object):
         self._init_sites_list()
 
     def _init_sites_list(self):
-        sites_data = self._request('/sites', pagesize=99999)
+        sites_data = self._request('sites', pagesize=99999)
 
         sites = {}
 
