@@ -3,6 +3,14 @@ import json
 import httmock
 
 
+def only_httmock(*mocks):
+    """
+    Wraps a typical HTTPMock context manager to raise an error if no mocks match.
+    """
+    mocks = mocks + (fail_everything_else,)
+    return httmock.HTTMock(*mocks)
+
+
 @httmock.urlmatch(netloc=r'^api\.stackexchange\.com$', path=r'^/2\.2/sites$')
 def sites_returning_stackoverflow(url, request):
     """
@@ -55,3 +63,9 @@ def throttle_violation_for_questions(url, request):
         "error_message": "too many requests from this IP, more requests available in 65127 seconds",
         "error_name": "throttle_violation"
     })
+
+
+@httmock.urlmatch(netloc=r'.*')
+def fail_everything_else(url, request):
+    raise Exception("unexpected request; no mock available", request)
+

@@ -1,11 +1,11 @@
 import pytest
-from httmock import HTTMock
 
 import stackexchange
 from stackexchange.errors import (
     APIError, BadParameter, ThrottleViolation)
 
 from .mock_responses import (
+    only_httmock,
     sites_returning_stackoverflow, throttle_violation_for_questions)
 
 
@@ -46,11 +46,11 @@ def test_api_errors_raised():
     Confirms that error responses from the API result in raised APIErrors.
     """
 
-    with HTTMock(
+    with only_httmock(
         sites_returning_stackoverflow,
         throttle_violation_for_questions
     ):
         stack_exchange = stackexchange.StackExchange()
 
         with pytest.raises(ThrottleViolation):
-            stack_exchange._request('/questions', site='stackoverflow')
+            stack_exchange._request('questions', site='stackoverflow')

@@ -1,9 +1,8 @@
 import pytest
-from httmock import HTTMock
 
 import stackexchange
 
-from .mock_responses import sites_returning_stackoverflow
+from .mock_responses import only_httmock, sites_returning_stackoverflow
 
 
 def test_stackexchange_init_sites():
@@ -11,7 +10,7 @@ def test_stackexchange_init_sites():
     Tests that the StackExchange class will correctly initialize a list
     of Site objects based on a request to /sites, when instantiated.
     """
-    with HTTMock(sites_returning_stackoverflow):
+    with only_httmock(sites_returning_stackoverflow):
         stack_exchange = stackexchange.StackExchange()
 
         assert len(stack_exchange.sites) == 1
