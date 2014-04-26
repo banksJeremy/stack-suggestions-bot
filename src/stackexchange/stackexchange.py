@@ -41,6 +41,13 @@ class StackExchange(object):
 
         params = dict(kwargs)
 
+        # The "unsafe" mode returns data correctly encoded, instead of
+        # protectively over-encoded. That's the main reason we're using
+        # it, although also includes many (all?) fields that aren't
+        # included by default. Ideally, we may want to create a custom
+        # filter returning what we actually know how to use.
+        params['filter'] = 'unsafe'
+
         if site:
             params['site'] = site
 
@@ -61,7 +68,7 @@ class StackExchange(object):
         Returns a Site object given a site's domain, name, slug, or ID.
         """
 
-        # if given the api identifier, we can get it instantly 
+        # if given the api identifier, we can get it instantly
         if identifier in self.sites:
             return self.sites[identifier]
 
@@ -90,7 +97,7 @@ class APIItems(list):
         self._response_data = response_data
 
         self.has_more = response_data['has_more']
-        
+
         self.backoff = response_data.get('backoff', 0)
         self.quota_max = response_data['quota_max']
         self.quota_remaining = response_data['quota_remaining']

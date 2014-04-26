@@ -19,7 +19,7 @@ class APIError(Exception):
 
     def __init__(self, response_data):
         self._response_data = response_data
-        
+
         super(APIError, self).__init__(
             "{error_name} ({error_id}): {error_message}".format(**response_data))
 
