@@ -32,10 +32,12 @@ def main():
     settings = json.load(sys.stdin)
 
     app = Application(settings)
-    
+
     similar = app.site.get_similar("how do i install vm on ec2?")
 
-    pp(similar)
+    pp([q['title'] for q in similar])
+
+    print "Are there more?", similar.has_more
 
 
 if __name__ == '__main__':

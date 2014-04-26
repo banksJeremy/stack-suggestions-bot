@@ -50,4 +50,4 @@ class Site(object):
             'nottagged': ';'.join(excluded_tags or [])
         }
 
-        return self._request('similar', **params)['items']
+        return self._request('similar', **params)

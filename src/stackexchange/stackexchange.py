@@ -3,6 +3,7 @@ import json
 import requests
 
 from .site import Site
+from .errors import APIError
 
 
 class StackExchange(object):
@@ -11,6 +12,9 @@ class StackExchange(object):
 
     This doesn't consider rate limiting or any important things like
     that. Careless use could result in being blocked.
+
+    This doesn't support the use of filters which remove API fields
+    that are present by default.
     """
 
     API_ROOT = 'http://api.stackexchange.com/2.2/'
@@ -25,7 +29,7 @@ class StackExchange(object):
 
         sites = {}
 
-        for site_data in sites_data['items']:
+        for site_data in sites_data:
             site = Site(self, site_data)
             sites[site.api_site_parameter] = site
 
@@ -47,7 +51,10 @@ class StackExchange(object):
 
         response_data = json.loads(response.text, object_hook=object_hook)
 
-        return response_data
+        if 'error_id' in response_data:
+            raise APIError.from_response_data(response_data)
+        else:
+            return APIItems.from_response_data(response_data)
 
     def get_site(self, identifier):
         """
@@ -70,3 +77,22 @@ class StackExchange(object):
                 return site
 
         raise ValueError("no site found matching %r" % (identifier,))
+
+
+class APIItems(list):
+    """
+    A list of items from an API response, with API metadata attached.
+    """
+    @staticmethod
+    def from_response_data(response_data):
+        self = APIItems(response_data['items'])
+
+        self._response_data = response_data
+
+        self.has_more = response_data['has_more']
+        
+        self.backoff = response_data.get('backoff', 0)
+        self.quota_max = response_data['quota_max']
+        self.quota_remaining = response_data['quota_remaining']
+
+        return self
