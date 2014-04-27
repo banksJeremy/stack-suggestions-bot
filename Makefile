@@ -9,8 +9,9 @@ test: install-dependencies
 
 install:
 	rm -rf src/*.egg-info
-	pip install .
+	pip install --process-dependency-links .
 
 install-dependencies:
+	# also links our packages into the environment
 	rm -rf src/*.egg-info
-	pip install -qe .
+	pip install -qe . --process-dependency-links
