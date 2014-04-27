@@ -45,7 +45,7 @@ class Site(object):
             'title': title,
             'sort': 'relevance',
             'page': 1,
-            'page_size': 25,
+            'pagesize': 10,
             'tagged': ';'.join(preferred_tags or []),
             'nottagged': ';'.join(excluded_tags or [])
         }

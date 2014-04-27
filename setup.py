@@ -1,5 +1,4 @@
 import setuptools
-import time
 
 
 setuptools.setup(
@@ -10,9 +9,9 @@ setuptools.setup(
     license='MIT',
     packages=[
         'stackexchange',
+        'stacksuggestionsbot'
     ],
     py_modules=[
-        'stacksuggestionsbot',
     ],
     package_dir={
         '': 'src'

@@ -6,8 +6,11 @@ from pprintpp import pprint as pp
 
 import stackexchange
 
+from .bot import Bot
+
 
 class Application(object):
+    # XXX: maybe this should just be rolled into Bot
     def __init__(self, settings):
         self._settings = settings
 
@@ -22,23 +25,4 @@ class Application(object):
         self.site = self._stack.get_site(se_site)
 
     def _init_irc(self):
-        return NotImplemented
-
-
-def main():
-    logging.basicConfig(level=logging.DEBUG)
-
-    sys.stderr.write("Reading settings from stdin\n")
-    settings = json.load(sys.stdin)
-
-    app = Application(settings)
-
-    similar = app.site.get_similar("how do i install vm on ec2?")
-
-    pp([q['title'] for q in similar])
-
-    print "Are there more?", similar.has_more
-
-
-if __name__ == '__main__':
-    main()
+        self.bot = Bot(self)
