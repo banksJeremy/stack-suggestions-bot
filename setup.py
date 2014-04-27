@@ -24,10 +24,10 @@ setuptools.setup(
         'pytest==2.5.2',
         'pytest-capturelog==0.7',
         'requests==2.2.1',
-        'ChatExchange==0.0.0dev1'
+        'ChatExchange==0.0.0dev2'
     ],
     dependency_links=[
         ("git+ssh://git@github.com/jeremybanks/ChatExchange.git"
-         "@dd4ed4f4e22f6f668d1c60c4f7fa09cf43f2e290#egg=ChatExchange-0.0.0dev1")
+         "@acc83976e07ca0be0a97006809d7b5abda02f88e#egg=ChatExchange-0.0.0dev2")
     ]
 )
