@@ -9,6 +9,6 @@ questions when questions are asked in chat.
 For simplicity, the Makefile will install dependencies, run tests, and
 run the application, but you must first have installed pip, and you
 are *strongly* recommended to also have installed virtualenv and
-activated a new environment. (Installing this package would result in
-our `stackexchange` package being installed in your environment, which
-could conflcit with other API wrappers if it's not isolated.)
+activated a new environment. (Particularly because when the Makefile
+installs dependencies it will also link our packages into environment's
+site packages.)
