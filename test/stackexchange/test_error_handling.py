@@ -4,7 +4,7 @@ import stackexchange
 from stackexchange.errors import (
     APIError, BadParameter, ThrottleViolation)
 
-from .mock_responses import (
+from mock_responses import (
     only_httmock,
     sites_returning_stackoverflow, throttle_violation_for_questions)
 

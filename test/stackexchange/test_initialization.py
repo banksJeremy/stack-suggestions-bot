@@ -2,7 +2,7 @@ import pytest
 
 import stackexchange
 
-from .mock_responses import only_httmock, sites_returning_stackoverflow
+from mock_responses import only_httmock, sites_returning_stackoverflow
 
 
 def test_stackexchange_init_sites():
