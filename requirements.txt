@@ -1,0 +1,5 @@
+# This file should contain only VCS requirements, for non-PyPI packages.
+# These requirements should still also be specified in setup.py.
+git+https://github.com/jeremybanks/ChatExchange.git@acc83976e07ca0be0a97006809d7b5abda02f88e#egg=ChatExchange
+
+-e .

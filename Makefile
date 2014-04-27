@@ -7,11 +7,7 @@ run: install-dependencies
 test: install-dependencies
 	PYTHONPATH="src/:$(PYTHONPATH)" python -m pytest
 
-install:
-	rm -rf src/*.egg-info
-	pip install --process-dependency-links .
-
 install-dependencies:
-	# also links our packages into the environment
 	rm -rf src/*.egg-info
-	pip install -qe . --process-dependency-links
+	# also links our packages into the environment
+	pip install -r requirements.txt
