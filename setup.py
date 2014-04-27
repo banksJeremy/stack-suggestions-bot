@@ -27,7 +27,7 @@ setuptools.setup(
         'ChatExchange==0.0.0dev2'
     ],
     dependency_links=[
-        ("git+ssh://git@github.com/jeremybanks/ChatExchange.git"
+        ("git+https://github.com/jeremybanks/ChatExchange.git"
          "@acc83976e07ca0be0a97006809d7b5abda02f88e#egg=ChatExchange-0.0.0dev2")
     ]
 )
