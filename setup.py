@@ -29,6 +29,6 @@ setuptools.setup(
     dependency_links=[
         # These should also be specified in requirements.txt.
         ("git+https://github.com/jeremybanks/ChatExchange.git"
-         "@acc83976e07ca0be0a97006809d7b5abda02f88e#egg=ChatExchange-0.0.0dev2")
+         "@b40518ac3b06cfbc759a909ac1cf53075170839f#egg=ChatExchange-0.0.0dev2")
     ]
 )

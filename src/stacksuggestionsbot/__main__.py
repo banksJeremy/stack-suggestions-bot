@@ -1,6 +1,15 @@
+import json
+import logging
+import signal
 import sys
+import time
 
-from .application import *
+from pprintpp import pprint as pp
+
+from .bot import Bot
+
+
+logger = logging.getLogger(__name__)
 
 
 def main():
@@ -9,13 +18,21 @@ def main():
     sys.stderr.write("Reading settings from stdin\n")
     settings = json.load(sys.stdin)
 
-    app = Application(settings)
+    def on_int(signal, frame):
+        logger.info("Starting to kill bot")
+        bot.kill()
+        logger.info("Shutting down in a few seconds")
+        time.sleep(3)
+        sys.exit(0)
 
-    similar = app.site.get_similar("how do i install vm on ec2?")
+    bot = Bot(settings)
 
-    pp([q['title'] for q in similar])
+    signal.signal(signal.SIGINT, on_int)
 
-    print "Are there more?", similar.has_more
+    bot.start()
+
+    while True:
+        time.sleep(2)
 
 
 if __name__ == '__main__':

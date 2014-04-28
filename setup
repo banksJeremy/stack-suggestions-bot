@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Installs this package's requirements into the environment, and
+# links this copy of the package into the environment.
+rm -rf src/*.egg-info
+pip install -r requirements.txt

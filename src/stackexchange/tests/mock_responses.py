@@ -69,3 +69,36 @@ def throttle_violation_for_questions(url, request):
 def fail_everything_else(url, request):
     raise Exception("unexpected request; no mock available", request)
 
+
+THREE_SO_BADGES_WRAPPED = {
+    "items": [
+        {
+            "badge_type": "tag_based",
+            "award_count": 17,
+            "rank": "bronze",
+            "badge_id": 263,
+            "link": "http://stackoverflow.com/badges/263/cryptography",
+            "name": "cryptography"
+        },
+        {
+            "badge_type": "tag_based",
+            "award_count": 35,
+            "rank": "bronze",
+            "badge_id": 264,
+            "link": "http://stackoverflow.com/badges/264/reference",
+            "name": "reference"
+        },
+        {
+            "badge_type": "tag_based",
+            "award_count": 1160,
+            "rank": "bronze",
+            "badge_id": 265,
+            "link": "http://stackoverflow.com/badges/265/c",
+            "name": "c"
+        }
+    ],
+    "has_more": True,
+    "quota_max": 10000,
+    "quota_remaining": 9913
+}
+

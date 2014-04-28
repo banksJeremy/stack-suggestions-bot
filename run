@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+PYTHONPATH="src/:$PYTHONPATH" python -m stacksuggestionsbot \
+    < settings/se-suggestion.cs1692x.moocforums.org-unauthenticated.json

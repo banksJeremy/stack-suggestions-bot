@@ -5,6 +5,10 @@
         "password": null,
         "channel": "#jb_test"
     },
+    "sec": {
+        "host_id": "SE",
+        "room_id": "11540"
+    },
     "stackexchange": {
         "client_id": 2943,
         "site": "edx-cs169-1x",
